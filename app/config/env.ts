@@ -9,4 +9,4 @@ import {Platform} from 'react-native';
  */
 const API_HOST = Platform.select({android: '10.0.2.2', default: 'localhost'});
 
-export const API_BASE_URL = `http://${API_HOST}/car_rental_api`;
+export const API_BASE_URL = `http://${API_HOST}/car_rental_system`;
