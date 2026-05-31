@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "types": ["react-native", "jest"],
+    "lib": ["ES2020", "DOM"],
+    "allowJs": true,
+    "jsx": "react-native",
+    "noEmit": true,
+    "isolatedModules": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "ignoreDeprecations": "6.0",
+    "allowImportingTsExtensions": true,
+    "allowArbitraryExtensions": true,
+    "resolveJsonModule": true,
+    "resolvePackageJsonImports": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "App.tsx",
+    "app/**/*",
+    "__tests__/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "android",
+    "ios",
+    "car-app",
+    "app/screens/search"
+  ]
+}
