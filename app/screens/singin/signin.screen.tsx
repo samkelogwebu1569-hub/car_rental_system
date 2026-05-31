@@ -14,7 +14,8 @@ import {navigate} from '../../navigators/navigation-utilities';
 
 const SignInScreen = () => {
   const styles = createStyles();
-  const {isSecure, setIsSecure} = useSignin();
+  const {isSecure, setIsSecure, setEmail, setPassword, loading, onSignin} =
+    useSignin();
   const {logo_black} = assets;
   return (
     <ScrollView style={styles.container}>
@@ -28,14 +29,14 @@ const SignInScreen = () => {
       </View>
       <View style={styles.inputContainer}>
         <InputComponent
-          onChangeText={e => console.log(e)}
+          onChangeText={setEmail}
           placeholder={'Email/Phone Number'}
         />
 
         <InputComponent
           isSecure
           secureTextEntry={isSecure}
-          onChangeText={e => console.log(e)}
+          onChangeText={setPassword}
           placeholder={'Password'}
           onSecurePress={() => setIsSecure(!isSecure)}
         />
@@ -50,10 +51,18 @@ const SignInScreen = () => {
           />
           <Text style={styles.textRemember}>Remember Me</Text>
         </View>
-        <Text style={styles.textRemember}>Forgot Password</Text>
+        <Text
+          onPress={() => navigate('ResetScreen')}
+          style={styles.textRemember}>
+          Forgot Password
+        </Text>
       </View>
       <View style={styles.buttonContainer}>
-        <Button text="Login" textStyles={styles.buttonText} />
+        <Button
+          onPress={onSignin}
+          text={loading ? 'Please wait...' : 'Login'}
+          textStyles={styles.buttonText}
+        />
         <Button
           onPress={() => navigate('SignUpScreen')}
           text="Sign Up"

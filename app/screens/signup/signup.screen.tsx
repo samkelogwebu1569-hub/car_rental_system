@@ -13,7 +13,16 @@ import {createStyles} from './signup.styles';
 
 const SignUpScreen = () => {
   const styles = createStyles();
-  const {isSecure, setIsSecure} = useSignup();
+  const {
+    isSecure,
+    setIsSecure,
+    setFullName,
+    setEmail,
+    setPassword,
+    setCountry,
+    loading,
+    onSignUp,
+  } = useSignup();
   const {logo_black} = assets;
   return (
     <ScrollView style={styles.container}>
@@ -26,31 +35,33 @@ const SignUpScreen = () => {
       </View>
       <View style={styles.inputContainer}>
         <InputComponent
-          onChangeText={e => console.log(e)}
+          onChangeText={setFullName}
           placeholder={'Full Name'}
         />
         <InputComponent
-          onChangeText={e => console.log(e)}
+          onChangeText={setEmail}
           placeholder={'Email Address'}
+          keyboardType={'email-address'}
         />
         <InputComponent
           isSecure
           secureTextEntry={isSecure}
-          onChangeText={e => console.log(e)}
+          onChangeText={setPassword}
           placeholder={'Password'}
           onSecurePress={() => setIsSecure(!isSecure)}
         />
-        <InputComponent
-          onChangeText={e => console.log(e)}
-          placeholder={'Country'}
-        />
+        <InputComponent onChangeText={setCountry} placeholder={'Country'} />
       </View>
       {renderMarginTop(12)}
       <View style={styles.buttonContainer}>
-        <Button text="Login" textStyles={styles.buttonText} />
         <Button
-          onPress={() => navigate('ResetScreen')}
-          text="Sign Up"
+          onPress={onSignUp}
+          text={loading ? 'Please wait...' : 'Sign Up'}
+          textStyles={styles.buttonText}
+        />
+        <Button
+          onPress={() => navigate('SignInScreen')}
+          text="Login"
           textStyles={styles.outlineButtonSignUpText}
           buttonStyles={styles.outlineButton}
         />

@@ -4,8 +4,8 @@ export type NavigatorParamList = {
   ['SignInScreen']: undefined;
   ['SignUpScreen']: undefined;
   ['ResetScreen']: undefined;
-  ['VerifyScreen']: undefined;
-  ['OtpScreen']: undefined;
+  ['VerifyScreen']: {email?: string} | undefined;
+  ['OtpScreen']: {email?: string; purpose?: 'verify' | 'reset'} | undefined;
   ['auth']: undefined;
   ['tabStack']: undefined;
   ['authStack']: undefined;
