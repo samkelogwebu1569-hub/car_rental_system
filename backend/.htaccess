@@ -1,0 +1,9 @@
+# Serve the web frontend (index.html) at the folder root; the PHP API
+# front controller (index.php) handles everything under /api/.
+DirectoryIndex index.html index.php
+
+# Route every request that is not a real file/directory to the front controller.
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]

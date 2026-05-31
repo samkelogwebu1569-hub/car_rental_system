@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Car Rental System</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand" id="navHome">
+      <span class="logo">🚗</span>
+      <span>Car Rental</span>
+    </div>
+    <nav class="nav" id="nav">
+      <a href="#/cars" data-link>Cars</a>
+      <a href="#/signin" data-link id="navSignin">Sign in</a>
+      <a href="#/signup" data-link id="navSignup">Sign up</a>
+      <button class="link-btn hidden" id="navSignout">Sign out</button>
+      <span class="user-chip hidden" id="userChip"></span>
+    </nav>
+  </header>
+
+  <main id="app" class="container"></main>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- ============ Templates ============ -->
+
+  <template id="view-cars">
+    <section>
+      <h1>Find your car</h1>
+      <form class="filters" id="carFilters">
+        <input type="search" name="q" placeholder="Search name, brand or model…" />
+        <select name="type">
+          <option value="">All types</option>
+          <option value="SUV">SUV</option>
+          <option value="Sedan">Sedan</option>
+          <option value="Sports">Sports</option>
+          <option value="Hatchback">Hatchback</option>
+        </select>
+        <select name="transmission">
+          <option value="">Any transmission</option>
+          <option value="automatic">Automatic</option>
+          <option value="manual">Manual</option>
+        </select>
+        <button type="submit">Search</button>
+      </form>
+      <p class="result-count" id="carCount"></p>
+      <div class="car-grid" id="carGrid"></div>
+    </section>
+  </template>
+
+  <template id="view-signin">
+    <section class="auth-card">
+      <h1>Sign in</h1>
+      <form id="signinForm" class="form">
+        <label>Email<input type="email" name="email" required /></label>
+        <label>Password<input type="password" name="password" required /></label>
+        <button type="submit">Sign in</button>
+      </form>
+      <p class="muted">No account? <a href="#/signup" data-link>Create one</a></p>
+      <p class="muted"><a href="#/reset" data-link>Forgot password?</a></p>
+    </section>
+  </template>
+
+  <template id="view-signup">
+    <section class="auth-card">
+      <h1>Create account</h1>
+      <form id="signupForm" class="form">
+        <label>Full name<input type="text" name="full_name" required /></label>
+        <label>Email<input type="email" name="email" required /></label>
+        <label>Phone (optional)<input type="tel" name="phone" /></label>
+        <label>Country (optional)<input type="text" name="country" /></label>
+        <label>Password<input type="password" name="password" minlength="6" required /></label>
+        <button type="submit">Sign up</button>
+      </form>
+      <p class="muted">Already have an account? <a href="#/signin" data-link>Sign in</a></p>
+    </section>
+  </template>
+
+  <template id="view-otp">
+    <section class="auth-card">
+      <h1>Verify your account</h1>
+      <p class="muted">We sent a 4-digit code to <b id="otpEmail"></b>.
+        <br/>(Dev mode: the code is shown automatically below.)</p>
+      <form id="otpForm" class="form">
+        <label>Verification code<input type="text" name="code" inputmode="numeric" maxlength="4" required /></label>
+        <button type="submit">Verify</button>
+      </form>
+    </section>
+  </template>
+
+  <template id="view-reset">
+    <section class="auth-card">
+      <h1>Reset password</h1>
+      <form id="resetRequestForm" class="form">
+        <label>Email<input type="email" name="email" required /></label>
+        <button type="submit">Send reset code</button>
+      </form>
+      <div id="resetStep2" class="hidden">
+        <hr/>
+        <form id="resetConfirmForm" class="form">
+          <label>Reset code<input type="text" name="code" inputmode="numeric" maxlength="4" required /></label>
+          <label>New password<input type="password" name="password" minlength="6" required /></label>
+          <button type="submit">Set new password</button>
+        </form>
+      </div>
+    </section>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>

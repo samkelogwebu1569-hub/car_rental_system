@@ -1,16 +1,40 @@
-import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {RouteProp, useRoute} from '@react-navigation/native';
+import React, {useState} from 'react';
+import {Alert, Image, Text, View} from 'react-native';
 import assets from '../../assets';
 import Button from '../../components/button/component';
-import InputComponent from '../../components/input/component';
 import OtpComponent from '../../components/otp/component';
+import {NavigatorParamList} from '../../navigators/navigation-route';
 import {navigate} from '../../navigators/navigation-utilities';
+import {AuthService} from '../../services/auth.service';
 import {renderMarginTop} from '../../utils/ui-utils';
 import {createStyles} from './otp.styles';
 
 const OtpScreen = () => {
   const styles = createStyles();
   const {logo_black} = assets;
+  const route = useRoute<RouteProp<NavigatorParamList, 'OtpScreen'>>();
+  const email = route.params?.email ?? '';
+
+  const [code, setCode] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const onContinue = async () => {
+    if (code.length < 4) {
+      Alert.alert('Invalid code', 'Please enter the 4-digit verification code.');
+      return;
+    }
+    try {
+      setLoading(true);
+      await AuthService.verifyOtp(email, code);
+      Alert.alert('Verified', 'Your account has been verified. Please sign in.');
+      navigate('SignInScreen');
+    } catch (err) {
+      Alert.alert('Verification failed', (err as Error).message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -26,16 +50,16 @@ const OtpScreen = () => {
             </Text>
             {renderMarginTop(12)}
             <Text style={styles.infoText}>
-              We have send a Code to : +100******00
+              We have sent a code to : {email || 'your account'}
             </Text>
           </View>
           <View style={styles.inputContainer}>
-            <OtpComponent onOTPChange={e => console.log(e)} />
+            <OtpComponent onOTPChange={setCode} />
           </View>
           {renderMarginTop(28)}
           <Button
-            onPress={() => navigate('OtpScreen')}
-            text="Continue"
+            onPress={onContinue}
+            text={loading ? 'Please wait...' : 'Continue'}
             textStyles={styles.buttonText}
           />
           {renderMarginTop(28)}
