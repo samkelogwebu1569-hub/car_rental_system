@@ -34,11 +34,19 @@ const renderPaddingTop = (value: number) => {
 const renderMarginHorizontal = (value: number) => {
   return <View style={{marginHorizontal: scale(value || 0)}} />;
 };
+const renderBoderBottom = (value: number) => {
+  return (
+    <View
+      style={{borderBottomWidth: 1, borderBottomColor: '#E0E0E0', marginTop: scale(value || 0)}}
+    />
+  );
+};
 const renderFlexView = () => {
   return <View style={{flex: 1}} />;
 };
 
 export {
+  renderBoderBottom,
   renderFlexView,
   renderMarginBottom,
   renderMarginHorizontal,

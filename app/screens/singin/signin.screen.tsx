@@ -50,10 +50,18 @@ const SignInScreen = () => {
           />
           <Text style={styles.textRemember}>Remember Me</Text>
         </View>
-        <Text style={styles.textRemember}>Forgot Password</Text>
+        <Text
+          onPress={() => navigate('ResetScreen')}
+          style={styles.textRemember}>
+          Forgot Password
+        </Text>
       </View>
       <View style={styles.buttonContainer}>
-        <Button text="Login" textStyles={styles.buttonText} />
+        <Button
+          onPress={() => navigate('SignInScreen')}
+          text="Login"
+          textStyles={styles.buttonText}
+        />
         <Button
           onPress={() => navigate('SignUpScreen')}
           text="Sign Up"
@@ -83,7 +91,11 @@ const SignInScreen = () => {
       <View style={styles.haveAccountContainer}>
         <Text style={styles.dontHaveText}>
           Don't have an account ? {'\t'}
-          <Text style={styles.dontHaveText}>Sign Up</Text>
+          <Text
+            onPress={() => navigate('SignUpScreen')}
+            style={styles.dontHaveText}>
+            Sign Up
+          </Text>
         </Text>
       </View>
       {renderMarginBottom(26)}

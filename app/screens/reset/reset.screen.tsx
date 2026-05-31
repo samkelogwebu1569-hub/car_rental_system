@@ -5,7 +5,7 @@ import {createStyles} from './reset.styles';
 import {renderMarginBottom, renderMarginTop} from '../../utils/ui-utils';
 import InputComponent from '../../components/input/component';
 import Button from '../../components/button/component';
-import {goBack, navigate} from '../../navigators/navigation-utilities';
+import {navigate} from '../../navigators/navigation-utilities';
 
 const ResetScreen = () => {
   const styles = createStyles();
@@ -51,7 +51,9 @@ const ResetScreen = () => {
           </Text>
         </View>
       </View>
-      <Text onPress={goBack} style={[styles.dontHaveText, styles.textCenter]}>
+      <Text
+        onPress={() => navigate('SignUpScreen')}
+        style={[styles.dontHaveText, styles.textCenter]}>
         Create a New account{' '}
       </Text>
       {renderMarginBottom(32)}

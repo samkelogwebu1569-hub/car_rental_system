@@ -2,7 +2,6 @@ import React from 'react';
 import {Image, Text, View} from 'react-native';
 import assets from '../../assets';
 import Button from '../../components/button/component';
-import InputComponent from '../../components/input/component';
 import OtpComponent from '../../components/otp/component';
 import {navigate} from '../../navigators/navigation-utilities';
 import {renderMarginTop} from '../../utils/ui-utils';
@@ -34,7 +33,7 @@ const OtpScreen = () => {
           </View>
           {renderMarginTop(28)}
           <Button
-            onPress={() => navigate('OtpScreen')}
+            onPress={() => navigate('SignInScreen')}
             text="Continue"
             textStyles={styles.buttonText}
           />
